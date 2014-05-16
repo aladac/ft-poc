@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+
+require "curb"
+require "crack/xml"
+require "yaml"
+require "addressable/uri"
+require "pp"
+
+# Crack::XML.parse
+
+CONF = YAML.load_file("etc/ft-poc.yml")
+
+p CONF
+
+# http://api.filestube.com/?key=2c17a6258659780e0bc6d2ca41ab731e&phrase=kubuntu
+
+uri = Addressable::URI.parse(CONF["ft"]["api_url"])
+uri.query_values = {
+  key: CONF["ft"]["api_key"],
+  phrase: "kubuntu",
+  extension: "iso"
+}
+uri.query
+
+http = Curl.get(uri.to_s)
+pp Crack::XML.parse(http.body_str)
+
+
+
+
