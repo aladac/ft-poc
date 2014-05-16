@@ -14,4 +14,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "crack", "~> 0.4"
   s.add_runtime_dependency "curb", "~> 0.8"
   s.add_runtime_dependency "addressable", "~> 2.3"
+  s.add_runtime_dependency "nokogiri", "~> 1.6"
 end

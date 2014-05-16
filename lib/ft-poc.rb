@@ -1,6 +1,7 @@
 require "addressable/uri"
 require "curb"
 require "crack/xml"
+require "nokogiri"
 
 module FT
   # returns the root directiory of the gem
@@ -35,7 +36,36 @@ module FT
 
       http = Curl.get(uri.to_s)
       
-      result = Crack::XML.parse(http.body_str)
+      Crack::XML.parse(http.body_str)
+    end
+    # Get direct links in form of an Array from the FilesTube search result pages
+    def prune_links
+      links = []
+      result = self.perform
+      ft_links = result.ft_links
+      ft_links.each do |ft_link|
+        http = Curl.get(ft_link)
+        doc = Nokogiri::HTML(http.body_str)
+        link = doc.xpath('//*[@id="copy_paste_links"]').children.first.to_s.chomp
+        links.push link if link.empty? == false
+      end
+      links
+    end
+  end
+end
+
+class Hash
+  # Make a trip through a Hash iterating through "hits" nested Hash and return values of "links" in form of Array
+  def ft_links
+    begin
+      ft_links = []
+      hits = self["answer"]["results"]["hits"]
+      hits.each do |hit|
+        ft_links.push hit["link"]
+      end
+      ft_links
+    rescue NoMethodError
+      return nil
     end
   end
 end
