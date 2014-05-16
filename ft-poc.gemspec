@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.homepage    =
     'https://github.com/aladac/ft-poc'
   s.license       = 'MIT'
-  s.add_runtime_dependency = "crack"
-  s.add_runtime_dependency = "curb"
-  s.add_runtime_dependency = "addressable"
+  s.add_runtime_dependency "crack", "~> 0.4"
+  s.add_runtime_dependency "curb", "~> 0.8"
+  s.add_runtime_dependency "addressable", "~> 2.3"
 end
