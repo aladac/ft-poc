@@ -6,7 +6,8 @@ Gem::Specification.new do |s|
   s.description = "A simple POC script to search FilesTube from the command line"
   s.authors     = ["Adam Ladachowski"]
   s.email       = 'adam@saiden.pl'
-  s.files       = ["bin/ft-poc","etc/ft-poc.yml"]
+  s.files       = ["bin/ft-poc"]
+  s.executables = s.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   s.homepage    =
     'https://github.com/aladac/ft-poc'
   s.license       = 'MIT'

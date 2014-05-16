@@ -4,10 +4,14 @@ require "curb"
 require "crack/xml"
 require "yaml"
 require "addressable/uri"
-require "pp"
 require "optparse"
 
-CONF = YAML.load_file("etc/ft-poc.yml")
+CONF = {
+  ft: {
+    api_url: "http://api.filestube.com",
+    api_key: "d395980ed3bb71cfbcbf845ea4a18928"
+  }
+}
 
 options={}
 
@@ -26,9 +30,9 @@ if options[:phrase].nil?
   exit
 end
 
-uri = Addressable::URI.parse(CONF["ft"]["api_url"])
+uri = Addressable::URI.parse(CONF[:ft][:api_url])
 uri.query_values = {
-  key: CONF["ft"]["api_key"],
+  key: CONF[:ft][:api_key],
   phrase: options[:phrase],
   extension: ( options[:ext] ? options[:ext] : nil )
 }
