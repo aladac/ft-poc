@@ -5,26 +5,38 @@ require "crack/xml"
 require "yaml"
 require "addressable/uri"
 require "pp"
-
-# Crack::XML.parse
+require "optparse"
 
 CONF = YAML.load_file("etc/ft-poc.yml")
 
-p CONF
+options={}
 
-# http://api.filestube.com/?key=2c17a6258659780e0bc6d2ca41ab731e&phrase=kubuntu
+OptionParser.new do |opts|
+  opts.banner = "Usage: example.rb [options]"
+  opts.on( "-p", "--phrase PHRASE", String, "Phrase to search for" ) do |phrase|
+    options[:phrase] = phrase
+  end
+  opts.on( "-e", "--extension EXTENSION", String, "Optional extension of the files searched using PHRASE" ) do |ext|
+    options[:ext] = ext
+  end
+end.parse!
+
+if options[:phrase].nil? 
+  puts "PHRASE is required"
+  exit
+end
 
 uri = Addressable::URI.parse(CONF["ft"]["api_url"])
 uri.query_values = {
   key: CONF["ft"]["api_key"],
-  phrase: "kubuntu",
-  extension: "iso"
+  phrase: options[:phrase],
+  extension: ( options[:ext] ? options[:ext] : nil )
 }
-uri.query
 
 http = Curl.get(uri.to_s)
-pp Crack::XML.parse(http.body_str)
+# pp Crack::XML.parse(http.body_str)
 
+p uri.to_s
 
 
 
