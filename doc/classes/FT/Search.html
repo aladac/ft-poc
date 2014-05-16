@@ -67,7 +67,12 @@
             
               
               <li>
-                <a href="#method-i-perform">perform</a>
+                <a href="#method-i-perform">perform</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-prune_links">prune_links</a>
               </li>
             
           </ul>
@@ -146,7 +151,7 @@
                 
               </p>
               <div id="method-i-perform_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/ft-poc.rb, line 27</span>
+                <pre><span class="ruby-comment"># File lib/ft-poc.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">perform</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;Need phrase to perform search&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@phrase</span>
   <span class="ruby-identifier">uri</span> = <span class="ruby-constant">Addressable</span><span class="ruby-operator">::</span><span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-constant">FT</span>.<span class="ruby-identifier">conf</span>[<span class="ruby-value">:url</span>])
@@ -158,7 +163,53 @@
 
   <span class="ruby-identifier">http</span> = <span class="ruby-constant">Curl</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">uri</span>.<span class="ruby-identifier">to_s</span>)
   
-  <span class="ruby-identifier">result</span> = <span class="ruby-constant">Crack</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">http</span>.<span class="ruby-identifier">body_str</span>)
+  <span class="ruby-constant">Crack</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">http</span>.<span class="ruby-identifier">body_str</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-prune_links">
+            
+              <b>prune_links</b>()
+            
+            <a href="../../classes/FT/Search.html#method-i-prune_links" name="method-i-prune_links" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Get direct links in form of an Array from the FilesTube search result pages</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-prune_links_source')" id="l_method-i-prune_links_source">show</a>
+                
+              </p>
+              <div id="method-i-prune_links_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/ft-poc.rb, line 42</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">prune_links</span>
+  <span class="ruby-identifier">links</span> = []
+  <span class="ruby-identifier">result</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">perform</span>
+  <span class="ruby-identifier">ft_links</span> = <span class="ruby-identifier">result</span>.<span class="ruby-identifier">ft_links</span>
+  <span class="ruby-identifier">ft_links</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ft_link</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">http</span> = <span class="ruby-constant">Curl</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">ft_link</span>)
+    <span class="ruby-identifier">doc</span> = <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">HTML</span>(<span class="ruby-identifier">http</span>.<span class="ruby-identifier">body_str</span>)
+    <span class="ruby-identifier">link</span> = <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-string">&#39;//*[@id=&quot;copy_paste_links&quot;]&#39;</span>).<span class="ruby-identifier">children</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">chomp</span>
+    <span class="ruby-identifier">links</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">link</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">link</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">links</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
