@@ -1,1 +1,1 @@
-Simple POC FilesTube command line search tool
+Simple POC FilesTube command line search tool and HTTP API binding
