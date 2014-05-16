@@ -1,12 +1,12 @@
 Gem::Specification.new do |s|
   s.name        = 'ft-poc'
-  s.version     = '0.0.1'
+  s.version     = '0.0.2'
   s.date        = '2014-05-16'
   s.summary     = "FilesTube cmdline search"
   s.description = "A simple POC script to search FilesTube from the command line"
   s.authors     = ["Adam Ladachowski"]
   s.email       = 'adam@saiden.pl'
-  s.files       = ["bin/ft-poc"]
+  s.files       = ["bin/ft-poc","lib/ft-poc.rb"]
   s.executables = s.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   s.homepage    =
     'https://github.com/aladac/ft-poc'

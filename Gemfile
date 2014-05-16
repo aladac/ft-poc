@@ -5,4 +5,7 @@ gem 'crack'
 gem 'curb'
 gem 'addressable'
 
-gem 'pry', group: :development
+group :development do
+  gem 'pry'
+  gem 'sdoc'
+end

@@ -1,17 +1,7 @@
 #!/usr/bin/env ruby
 
-require "curb"
-require "crack/xml"
-require "yaml"
-require "addressable/uri"
 require "optparse"
-
-CONF = {
-  ft: {
-    api_url: "http://api.filestube.com",
-    api_key: "d395980ed3bb71cfbcbf845ea4a18928"
-  }
-}
+require "ft-poc"
 
 options={}
 
@@ -30,15 +20,11 @@ if options[:phrase].nil?
   exit
 end
 
-uri = Addressable::URI.parse(CONF[:ft][:api_url])
-uri.query_values = {
-  key: CONF[:ft][:api_key],
-  phrase: options[:phrase],
-  extension: ( options[:ext] ? options[:ext] : nil )
-}
+search = FT::Search.new
+search.phrase = options[:phrase]
+search.ext = options[:ext]
 
-http = Curl.get(uri.to_s)
-result = Crack::XML.parse(http.body_str)
+result = search.perform
 
 result["answer"]["results"]["hits"].each do |hit|
   puts "name: " + hit["name"]
