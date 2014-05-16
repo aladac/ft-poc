@@ -34,9 +34,14 @@ uri.query_values = {
 }
 
 http = Curl.get(uri.to_s)
-# pp Crack::XML.parse(http.body_str)
+result = Crack::XML.parse(http.body_str)
 
-p uri.to_s
+result["answer"]["results"]["hits"].each do |hit|
+  puts "name: " + hit["name"]
+  puts "ext: " + hit["extension"]
+  puts
+end
+# p uri.to_s
 
 
 
