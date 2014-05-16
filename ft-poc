@@ -12,7 +12,7 @@ CONF = YAML.load_file("etc/ft-poc.yml")
 options={}
 
 OptionParser.new do |opts|
-  opts.banner = "Usage: example.rb [options]"
+  opts.banner = "Usage: #{$0} [options]"
   opts.on( "-p", "--phrase PHRASE", String, "Phrase to search for" ) do |phrase|
     options[:phrase] = phrase
   end
