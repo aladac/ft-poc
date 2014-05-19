@@ -1,7 +1,7 @@
 ### General
 Simple HTTP API bindings and example command line script for the FilesTube API.
 
-### Example Usage
+### Example Usage - Ruby
 ```ruby
 search = FT::Search.new
 search.phrase = "blabla"
@@ -16,6 +16,14 @@ search.prune_links
  "http://soundcloud.com/dalingo-lingo/take-a-bow-blabla-cover/download",
  "http://www.4shared.com/mp3/onAj2lJU/blabla.htm?aff=7637829"]
 
+```
+
+### Example Usage - Command Line
+```
+$ ft-poc -h
+Usage: ft-poc [options]
+    -p, --phrase PHRASE              Phrase to search for
+    -e, --extension EXTENSION        Optional extension of the files searched using PHRASE
 ```
 
 ### Gemfile
