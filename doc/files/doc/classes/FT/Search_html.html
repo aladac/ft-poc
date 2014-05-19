@@ -23,7 +23,7 @@
         </h1>
         <ul class="files">
             <li>doc/classes/FT/Search.html</li>
-            <li>Last modified: 2014-05-16 15:30:30 +0200</li>
+            <li>Last modified: 2014-05-16 16:46:04 +0200</li>
         </ul>
     </div>
 
@@ -96,7 +96,11 @@ charset=“utf-8”&gt;&lt;/script&gt;</p>
       &lt;ul&gt;
 
           &lt;li&gt;
-            &lt;a href=&quot;#method-i-perform&quot;&gt;perform&lt;/a&gt;
+            &lt;a href=&quot;#method-i-perform&quot;&gt;perform&lt;/a&gt;,
+          &lt;/li&gt;
+
+          &lt;li&gt;
+            &lt;a href=&quot;#method-i-prune_links&quot;&gt;prune_links&lt;/a&gt;
           &lt;/li&gt;
 
       &lt;/ul&gt;
@@ -150,7 +154,7 @@ charset=“utf-8”&gt;&lt;/script&gt;</p>
 
           &lt;/p&gt;
           &lt;div id=&quot;method-i-perform_source&quot; class=&quot;dyn-source&quot;&gt;
-            &lt;pre&gt;&lt;span class=&quot;ruby-comment&quot;&gt;# File lib/ft-poc.rb, line 27&lt;/span&gt;</code></pre>
+            &lt;pre&gt;&lt;span class=&quot;ruby-comment&quot;&gt;# File lib/ft-poc.rb, line 28&lt;/span&gt;</code></pre>
 
 <p>&lt;span class=“ruby-keyword”&gt;def&lt;/span&gt; &lt;span
 class=“ruby-keyword ruby-title”&gt;perform&lt;/span&gt;</p>
@@ -165,7 +169,50 @@ class=“ruby-keyword ruby-title”&gt;perform&lt;/span&gt;</p>
 
 &lt;span class=&quot;ruby-identifier&quot;&gt;http&lt;/span&gt; = &lt;span class=&quot;ruby-constant&quot;&gt;Curl&lt;/span&gt;.&lt;span class=&quot;ruby-identifier&quot;&gt;get&lt;/span&gt;(&lt;span class=&quot;ruby-identifier&quot;&gt;uri&lt;/span&gt;.&lt;span class=&quot;ruby-identifier&quot;&gt;to_s&lt;/span&gt;)
 
-&lt;span class=&quot;ruby-identifier&quot;&gt;result&lt;/span&gt; = &lt;span class=&quot;ruby-constant&quot;&gt;Crack&lt;/span&gt;&lt;span class=&quot;ruby-operator&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;ruby-constant&quot;&gt;XML&lt;/span&gt;.&lt;span class=&quot;ruby-identifier&quot;&gt;parse&lt;/span&gt;(&lt;span class=&quot;ruby-identifier&quot;&gt;http&lt;/span&gt;.&lt;span class=&quot;ruby-identifier&quot;&gt;body_str&lt;/span&gt;)</code></pre>
+&lt;span class=&quot;ruby-constant&quot;&gt;Crack&lt;/span&gt;&lt;span class=&quot;ruby-operator&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;ruby-constant&quot;&gt;XML&lt;/span&gt;.&lt;span class=&quot;ruby-identifier&quot;&gt;parse&lt;/span&gt;(&lt;span class=&quot;ruby-identifier&quot;&gt;http&lt;/span&gt;.&lt;span class=&quot;ruby-identifier&quot;&gt;body_str&lt;/span&gt;)</code></pre>
+
+<p>&lt;span class=“ruby-keyword”&gt;end&lt;/span&gt;&lt;/pre&gt;</p>
+
+<pre><code>      &lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;div class=&quot;method&quot;&gt;
+  &lt;div class=&quot;title method-title&quot; id=&quot;method-i-prune_links&quot;&gt;
+
+      &lt;b&gt;prune_links&lt;/b&gt;()
+
+    &lt;a href=&quot;../../classes/FT/Search.html#method-i-prune_links&quot; name=&quot;method-i-prune_links&quot; class=&quot;permalink&quot;&gt;Link&lt;/a&gt;
+  &lt;/div&gt;
+
+    &lt;div class=&quot;description&quot;&gt;
+      &lt;p&gt;Get direct links in form of an Array from the FilesTube search result pages&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;sourcecode&quot;&gt;
+
+      &lt;p class=&quot;source-link&quot;&gt;
+        Source: 
+        &lt;a href=&quot;javascript:toggleSource(&#39;method-i-prune_links_source&#39;)&quot; id=&quot;l_method-i-prune_links_source&quot;&gt;show&lt;/a&gt;
+
+      &lt;/p&gt;
+      &lt;div id=&quot;method-i-prune_links_source&quot; class=&quot;dyn-source&quot;&gt;
+        &lt;pre&gt;&lt;span class=&quot;ruby-comment&quot;&gt;# File lib/ft-poc.rb, line 42&lt;/span&gt;</code></pre>
+
+<p>&lt;span class=“ruby-keyword”&gt;def&lt;/span&gt; &lt;span
+class=“ruby-keyword ruby-title”&gt;prune_links&lt;/span&gt;</p>
+
+<pre><code>&lt;span class=&quot;ruby-identifier&quot;&gt;links&lt;/span&gt; = []
+&lt;span class=&quot;ruby-identifier&quot;&gt;result&lt;/span&gt; = &lt;span class=&quot;ruby-keyword&quot;&gt;self&lt;/span&gt;.&lt;span class=&quot;ruby-identifier&quot;&gt;perform&lt;/span&gt;
+&lt;span class=&quot;ruby-identifier&quot;&gt;ft_links&lt;/span&gt; = &lt;span class=&quot;ruby-identifier&quot;&gt;result&lt;/span&gt;.&lt;span class=&quot;ruby-identifier&quot;&gt;ft_links&lt;/span&gt;
+&lt;span class=&quot;ruby-identifier&quot;&gt;ft_links&lt;/span&gt;.&lt;span class=&quot;ruby-identifier&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;ruby-keyword&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;ruby-operator&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;ruby-identifier&quot;&gt;ft_link&lt;/span&gt;&lt;span class=&quot;ruby-operator&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;ruby-identifier&quot;&gt;http&lt;/span&gt; = &lt;span class=&quot;ruby-constant&quot;&gt;Curl&lt;/span&gt;.&lt;span class=&quot;ruby-identifier&quot;&gt;get&lt;/span&gt;(&lt;span class=&quot;ruby-identifier&quot;&gt;ft_link&lt;/span&gt;)
+  &lt;span class=&quot;ruby-identifier&quot;&gt;doc&lt;/span&gt; = &lt;span class=&quot;ruby-constant&quot;&gt;Nokogiri&lt;/span&gt;&lt;span class=&quot;ruby-operator&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;ruby-constant&quot;&gt;HTML&lt;/span&gt;(&lt;span class=&quot;ruby-identifier&quot;&gt;http&lt;/span&gt;.&lt;span class=&quot;ruby-identifier&quot;&gt;body_str&lt;/span&gt;)
+  &lt;span class=&quot;ruby-identifier&quot;&gt;link&lt;/span&gt; = &lt;span class=&quot;ruby-identifier&quot;&gt;doc&lt;/span&gt;.&lt;span class=&quot;ruby-identifier&quot;&gt;xpath&lt;/span&gt;(&lt;span class=&quot;ruby-string&quot;&gt;&amp;#39;//*[@id=&amp;quot;copy_paste_links&amp;quot;]&amp;#39;&lt;/span&gt;).&lt;span class=&quot;ruby-identifier&quot;&gt;children&lt;/span&gt;.&lt;span class=&quot;ruby-identifier&quot;&gt;first&lt;/span&gt;.&lt;span class=&quot;ruby-identifier&quot;&gt;to_s&lt;/span&gt;.&lt;span class=&quot;ruby-identifier&quot;&gt;chomp&lt;/span&gt;
+  &lt;span class=&quot;ruby-identifier&quot;&gt;links&lt;/span&gt;.&lt;span class=&quot;ruby-identifier&quot;&gt;push&lt;/span&gt; &lt;span class=&quot;ruby-identifier&quot;&gt;link&lt;/span&gt; &lt;span class=&quot;ruby-keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;ruby-identifier&quot;&gt;link&lt;/span&gt;.&lt;span class=&quot;ruby-identifier&quot;&gt;empty?&lt;/span&gt; &lt;span class=&quot;ruby-operator&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;ruby-keyword&quot;&gt;false&lt;/span&gt;
+&lt;span class=&quot;ruby-keyword&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;ruby-identifier&quot;&gt;links&lt;/span&gt;</code></pre>
 
 <p>&lt;span class=“ruby-keyword”&gt;end&lt;/span&gt;&lt;/pre&gt;</p>
 
