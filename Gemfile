@@ -9,4 +9,5 @@ gem 'nokogiri'
 group :development do
   gem 'pry'
   gem 'sdoc'
+  gem 'rspec'
 end
