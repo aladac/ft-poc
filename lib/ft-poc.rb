@@ -38,7 +38,7 @@ module FT
       
       Crack::XML.parse(http.body_str)
     end
-    # Get direct links in form of an Array from the FilesTube search result pages
+    # Get direct links to hosting sites in form of an Array from the FilesTube search result pages
     def prune_links
       links = []
       result = self.perform
@@ -50,6 +50,12 @@ module FT
         links.push link if link.empty? == false
       end
       links
+    end
+    # Get links to FilesTube search result pages in form of an Array
+    def links
+      links = []
+      result = self.perform
+      links = result.ft_links
     end
   end
 end
@@ -65,7 +71,7 @@ class Hash
       end
       ft_links
     rescue NoMethodError
-      return nil
+      return []
     end
   end
 end

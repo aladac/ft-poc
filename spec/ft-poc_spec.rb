@@ -21,3 +21,11 @@ describe FT::Search, "#prune_links" do
     search.prune_links.class.should eq(Array)
   end
 end
+
+describe FT::Search, "#links" do
+  it "Should return an Array on success" do
+    search = FT::Search.new
+    search.phrase = "blabla"
+    search.links.class.should eq(Array)
+  end
+end
