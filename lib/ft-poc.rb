@@ -23,6 +23,7 @@ module FT
     attr_accessor :phrase
     # The extension of the file(s) we are looking for with :phrase
     attr_accessor :ext
+    attr_accessor :page
     
     # Runs the search based on the instance vars
     def perform
@@ -31,7 +32,8 @@ module FT
       uri.query_values = {
         key: FT.conf[:key],
         phrase: @phrase,
-        extension: ( @ext ? @ext : nil )
+        extension: ( @ext ? @ext : nil ),
+        page: ( @page ? @page : nil )
       }
 
       http = Curl.get(uri.to_s)
